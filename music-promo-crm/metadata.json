@@ -1,0 +1,5 @@
+{
+  "name": "Music Promo CRM",
+  "description": "A desktop-style application to create, manage, and maintain a database of music industry contacts like radio stations, DJs, and publications. Features include CSV/Google Sheets import, advanced search and filtering, and an email shortlist generator.",
+  "requestFramePermissions": []
+}

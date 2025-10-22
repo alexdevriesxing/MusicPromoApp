@@ -1,0 +1,102 @@
+// Draft Prisma schema for standalone desktop app using SQLite
+// This is a draft for planning and does not integrate with the current UI yet.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./promobase.db"
+}
+
+enum ContactType {
+  RADIO_STATION
+  DJ_RECORD_POOL
+  INDIVIDUAL_DJ
+  MUSIC_REVIEWER
+  PUBLICATION
+  PLAYLIST_CURATOR
+  BACKGROUND_MUSIC_PROVIDER
+  GIG_VENUE
+}
+
+enum VerificationStatus {
+  UNVERIFIED
+  VERIFYING
+  VERIFIED
+  NOT_FOUND
+  ERROR
+}
+
+enum SocialPlatform {
+  FACEBOOK
+  TWITTER
+  INSTAGRAM
+  YOUTUBE
+  SPOTIFY
+  SOUNDCLOUD
+  BANDCAMP
+  TIKTOK
+}
+
+model Contact {
+  id                 String              @id
+  name               String
+  country            String
+  email              String
+  website            String?             @db.Text
+  type               ContactType
+  verificationStatus VerificationStatus? @default(UNVERIFIED)
+  verificationDetails String?            @db.Text
+  doNotContact       Boolean             @default(false)
+
+  contactPersons     ContactPerson[]
+  socials            SocialLink[]
+  genres             ContactGenre[]
+
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+
+  @@index([name])
+  @@index([country])
+  @@index([type])
+  @@index([email])
+}
+
+model ContactPerson {
+  id        String   @id @default(cuid())
+  name      String
+  position  String?
+  email     String?
+
+  contact   Contact  @relation(fields: [contactId], references: [id])
+  contactId String
+}
+
+model SocialLink {
+  id        String         @id @default(cuid())
+  platform  SocialPlatform
+  url       String
+
+  contact   Contact        @relation(fields: [contactId], references: [id])
+  contactId String
+
+  @@index([platform])
+}
+
+model Genre {
+  id     String         @id @default(cuid())
+  name   String         @unique
+  contacts ContactGenre[]
+}
+
+model ContactGenre {
+  contact   Contact @relation(fields: [contactId], references: [id])
+  contactId String
+  genre     Genre   @relation(fields: [genreId], references: [id])
+  genreId   String
+
+  @@id([contactId, genreId])
+}
+
