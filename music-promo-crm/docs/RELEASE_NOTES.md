@@ -1,5 +1,12 @@
 # Release Notes
 
+## v1.0.2 (Desktop)
+
+Validation
+----------
+- Validate CI auto-publish release flow; no functional code changes
+- Version bump to keep package/release versions in sync
+
 ## v1.0.1 (Desktop)
 
 Enhancements
