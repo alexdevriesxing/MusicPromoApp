@@ -1,5 +1,12 @@
 # Release Notes
 
+## v1.0.1 (Desktop)
+
+Enhancements
+------------
+- Bundle Tailwind CSS for offline desktop builds (removed CDN)
+- Added CI release step to create draft GitHub Releases with artifacts
+
 ## v1.0.0 (Desktop)
 
 First stable desktop release built with Tauri v2.
@@ -20,4 +27,3 @@ Notes
 -----
 - No Gemini/AI features are included by design.
 - For signing/notarization, see SIGNING.md.
-
