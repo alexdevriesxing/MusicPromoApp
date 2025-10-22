@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Theme overrides for light mode. We keep Tailwind classes and map the
    most-used dark utility classes to light equivalents when .theme-light is set. */
 
@@ -32,4 +36,3 @@
 /* Tables */
 .theme-light table thead { background-color: #f3f4f6 !important; }
 .theme-light table tbody tr:hover { background-color: #f3f4f6 !important; }
-
